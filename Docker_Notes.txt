@@ -1,0 +1,106 @@
+1. WHAT IS DOCKER?
+Docker is a containerization tool.
+It runs applications in isolated containers.
+Main idea: Build once, run anywhere.
+
+2. VM VS CONTAINER
+VM has full OS, heavy, slow.
+Container shares host OS, lightweight, fast.
+
+3. IMAGE VS CONTAINER
+Image = blueprint (read-only)
+Container = running image (writable)
+
+Rule: Image + Run = Container
+
+4. DOCKER ARCHITECTURE
+Docker CLI → Docker Daemon → Registry
+
+5. DOCKERFILE
+Text file to build image.
+FROM, RUN, COPY, CMD, ENTRYPOINT
+
+6. CMD VS ENTRYPOINT
+CMD = default command (override possible)
+ENTRYPOINT = fixed command
+Best practice: ENTRYPOINT + CMD
+
+7. docker build
+docker build -t myapp .
+. = build context (current directory)
+
+8. IMAGE COMMANDS
+docker images
+docker pull
+docker push
+docker rmi
+docker tag
+docker inspect
+docker history
+
+9. CONTAINER COMMANDS
+docker run
+docker ps / docker ps -a
+docker stop / start / restart
+docker rm
+docker logs
+docker exec
+docker inspect
+
+10. VOLUMES
+Volumes store data outside container.
+Mandatory for databases.
+
+11. VOLUME COMMANDS
+docker volume ls
+docker volume create
+docker volume inspect
+docker volume rm
+
+12. NETWORKING
+bridge, host, none
+Containers talk using names.
+
+13. PORT MAPPING
+-p host:container
+
+14. DOCKER COMPOSE
+docker-compose up
+docker-compose up -d
+docker-compose down
+docker-compose down -v
+
+15. MICROSERVICES
+Each service in separate container.
+Use service names, not IPs.
+
+16. IMAGE TAGGING
+Never use latest in production.
+Use semantic versions.
+
+17. PRIVATE REGISTRY
+Stores private company images.
+
+18. IMAGE SCANNING
+Trivy, Anchore
+
+19. ROOTLESS DOCKER
+Runs Docker without root.
+
+20. IMAGE SIGNING
+Cosign ensures image integrity.
+
+21. SBOM
+List of all libraries inside image.
+
+22. COMMON FAILURES
+No volume for DB
+Using latest
+No restart policy
+Disk full
+
+23. GOLDEN RULES
+Containers are temporary
+Images are immutable
+Volumes are permanent
+

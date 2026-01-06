@@ -1,0 +1,271 @@
+--------------------------------------------------
+1. CI/CD FUNDAMENTALS
+--------------------------------------------------
+
+CI (Continuous Integration):
+CI means when developers push code frequently, the system automatically:
+- Builds the code
+- Runs tests
+- Checks quality
+
+Goal:
+Catch bugs early and keep code always working.
+
+Example:
+Every time code is pushed to GitHub, pipeline runs automatically.
+
+CD (Continuous Delivery / Deployment):
+CD means code is automatically prepared or deployed to servers.
+
+Continuous Delivery:
+- Code is ready to deploy
+- Manual approval needed
+
+Continuous Deployment:
+- Code is deployed automatically
+- No manual approval
+
+--------------------------------------------------
+2. CI PIPELINE STAGES
+--------------------------------------------------
+
+1. Build Stage:
+- Compile code
+- Create JAR/WAR
+Command:
+mvn clean package
+
+2. Test Stage:
+- Run unit tests
+- Run integration tests
+Command:
+mvn test
+
+3. Package Stage:
+- Create Docker image
+- Prepare artifact
+
+Pipeline Flow:
+Code -> Build -> Test -> Package
+
+--------------------------------------------------
+3. ARTIFACT MANAGEMENT
+--------------------------------------------------
+
+Artifact:
+Output of build like:
+- JAR
+- WAR
+- Docker Image
+
+Why Artifact Repository?
+- Store build output
+- Same artifact used in all environments
+- Easy rollback
+
+Tools:
+- Nexus
+- Artifactory
+
+--------------------------------------------------
+4. JENKINS BASICS
+--------------------------------------------------
+
+Jenkins:
+Automation tool for CI/CD.
+
+Jenkins Components:
+- Controller (Master): Manages jobs
+- Agent: Executes jobs
+- Executor: Runs jobs in parallel
+
+Entry Point:
+- Jenkins UI
+- Jenkinsfile
+
+--------------------------------------------------
+5. FREESTYLE JOBS
+--------------------------------------------------
+
+Freestyle Job:
+- Created from Jenkins UI
+- Simple jobs
+- Not scalable
+
+Use case:
+Small projects or learning
+
+--------------------------------------------------
+6. AGENTS & EXECUTORS
+--------------------------------------------------
+
+Agent:
+Machine where build runs
+
+Executor:
+Number of jobs agent can run parallel
+
+Why Agents?
+- Distributed builds
+- Faster pipelines
+
+--------------------------------------------------
+7. PIPELINE AS CODE
+--------------------------------------------------
+
+Jenkinsfile:
+Pipeline written as code.
+
+Benefits:
+- Version controlled
+- Reusable
+- Auditable
+
+Declarative Pipeline Example:
+pipeline {
+ agent any
+ stages {
+  stage('Build') {
+   steps {
+    sh 'mvn clean package'
+   }
+  }
+ }
+}
+
+--------------------------------------------------
+8. SHARED LIBRARIES
+--------------------------------------------------
+
+Shared Libraries:
+Common pipeline logic reused.
+
+Benefits:
+- Avoid duplication
+- Enterprise standard
+
+--------------------------------------------------
+9. GITHUB ACTIONS
+--------------------------------------------------
+
+GitHub Actions:
+CI/CD tool inside GitHub.
+
+Workflow File:
+.github/workflows/ci.yml
+
+Main Parts:
+- Trigger
+- Jobs
+- Steps
+
+--------------------------------------------------
+10. GITHUB ACTIONS RUNNERS & CACHING
+--------------------------------------------------
+
+Runner:
+Machine that executes workflow.
+
+Types:
+- GitHub hosted
+- Self-hosted
+
+Caching:
+Used to speed up builds.
+
+Example:
+Cache Maven dependencies
+
+--------------------------------------------------
+11. REUSABLE WORKFLOWS
+--------------------------------------------------
+
+Reusable Workflow:
+Common CI logic reused across repos.
+
+Benefits:
+- DRY principle
+- Easy maintenance
+
+--------------------------------------------------
+12. GITLAB CI
+--------------------------------------------------
+
+Config File:
+.gitlab-ci.yml
+
+Stages:
+- build
+- test
+- deploy
+
+Runner:
+Machine executing pipeline.
+
+--------------------------------------------------
+13. CI BEST PRACTICES
+--------------------------------------------------
+
+Parallel Builds:
+- Faster pipelines
+
+Test Automation:
+- JUnit for unit tests
+- TestContainers for real DB testing
+
+Secrets Management:
+- Never hardcode secrets
+- Use Vault, KMS, Jenkins Credentials
+
+--------------------------------------------------
+14. CD CONCEPTS
+--------------------------------------------------
+
+Blue-Green Deployment:
+- Two environments
+- Zero downtime
+- Easy rollback
+
+Rolling Update:
+- Update one instance at a time
+- Safe but slow
+
+Canary Deployment:
+- Deploy to small users
+- Monitor
+- Then full deploy
+
+Feature Flags:
+- Deploy code
+- Enable feature later
+
+--------------------------------------------------
+15. CD TOOLS
+--------------------------------------------------
+
+ArgoCD:
+- GitOps based deployment
+- Git is source of truth
+
+FluxCD:
+- Alternative to ArgoCD
+
+Helm:
+- Kubernetes package manager
+- Versioned releases
+
+--------------------------------------------------
+16. CD BEST PRACTICES
+--------------------------------------------------
+
+Rollback Strategy:
+- Revert to previous version
+- Helm rollback
+
+Promotion Workflow:
+Dev -> Stage -> Prod
+
+Release Governance:
+- Approvals
+- Audit logs
+- Compliance
