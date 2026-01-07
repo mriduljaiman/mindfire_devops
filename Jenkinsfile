@@ -1,17 +1,29 @@
 pipeline {
     agent any
     stages {
+
         stage('Checkout') {
-            steps { checkout scm }
+            steps {
+                checkout scm
+            }
         }
+
         stage('Build') {
-            steps { sh 'mvn clean package' }
+            steps {
+                bat 'mvn clean package'
+            }
         }
+
         stage('Docker Build') {
-            steps { sh 'docker build -t mindfire-devops .' }
+            steps {
+                bat 'docker build -t mindfire-devops .'
+            }
         }
+
         stage('Run') {
-            steps { sh 'docker run --rm mindfire-devops' }
+            steps {
+                bat 'docker run --rm mindfire-devops'
+            }
         }
     }
 }
